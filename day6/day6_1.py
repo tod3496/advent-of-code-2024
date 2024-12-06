@@ -1,3 +1,5 @@
+import time
+
 DATAFILE = 'day6.data'
 
 MAP = []
@@ -42,8 +44,10 @@ def move_protocol(map, start_row, start_col):
 
 
 def main():
+    start = time.time()
     positions = move_protocol(MAP, START_ROW, START_COL)
     print(len(positions))
+    print('time:', time.time() - start)
 
 
 if __name__ == '__main__':

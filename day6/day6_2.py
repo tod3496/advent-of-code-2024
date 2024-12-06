@@ -1,32 +1,6 @@
 from day6_1 import *
 
 
-def move_protocol_2(map, start_row, start_col):
-    '''
-    Before every move forward, check if you would loop if there was a 
-    barrier in front of you
-    '''
-    barriers_that_loop = set()
-    direction = 0
-    row = start_row
-    col = start_col
-    while True:
-        next_row = row + DIRECTIONS[direction][0]
-        next_col = col + DIRECTIONS[direction][1]
-        if next_row < 0 or next_row >= len(map) or next_col < 0 or \
-                next_col >= len(map[0]):
-            break
-        if map[next_row][next_col] == '#':
-            direction = (direction + 1) % 4
-        else:
-            if check_hypothetical_loop(map, row, col, direction, next_row, next_col):
-                barriers_that_loop.add((next_row, next_col))
-            row = next_row
-            col = next_col
-
-    return len(barriers_that_loop)
-
-
 def check_hypothetical_loop(map, start_row, start_col, start_direction, b_row, b_col):
     '''
     hypothetically, if there was a barrier at b_row, b_col, would you loop?
@@ -59,6 +33,7 @@ def check_hypothetical_loop(map, start_row, start_col, start_direction, b_row, b
     
 
 def main():
+    start = time.time()
     count = 0
     positions = move_protocol(MAP, START_ROW, START_COL)
     positions.remove((START_ROW, START_COL))
@@ -67,6 +42,7 @@ def main():
             count += 1
 
     print(count)
+    print('time:', time.time() - start)
 
 
 if __name__ == '__main__':
