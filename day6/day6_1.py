@@ -10,6 +10,8 @@ with open(DATAFILE) as f:
             START_ROW = row
         row += 1
 
+DIRECTIONS = [(-1, 0), (0, 1), (1, 0), (0, -1)]
+
 
 def move_protocol(map, start_row, start_col):
     '''
@@ -19,13 +21,12 @@ def move_protocol(map, start_row, start_col):
     Saves distinct locations in a set
     '''
     distinct_locations = set()
-    directions = [(-1, 0), (0, 1), (1, 0), (0, -1)]
     direction = 0
     row = start_row
     col = start_col
     while True:
-        next_row = row + directions[direction][0]
-        next_col = col + directions[direction][1]
+        next_row = row + DIRECTIONS[direction][0]
+        next_col = col + DIRECTIONS[direction][1]
         if next_row < 0 or next_row >= len(map) or next_col < 0 or \
                 next_col >= len(map[0]):
             distinct_locations.add((row, col))
@@ -37,13 +38,12 @@ def move_protocol(map, start_row, start_col):
             row = next_row
             col = next_col
 
-    return len(distinct_locations)
-
+    return distinct_locations
 
 
 def main():
-    moves = move_protocol(MAP, START_ROW, START_COL)
-    print(moves)
+    positions = move_protocol(MAP, START_ROW, START_COL)
+    print(len(positions))
 
 
 if __name__ == '__main__':
