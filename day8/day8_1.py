@@ -3,7 +3,7 @@ import sys
 try:
     DATAFILE = sys.argv[1]
 except IndexError:
-    print('usage: python3 day7_X.py <DATAFILE>')
+    print('usage: python3 day8_X.py <DATAFILE>')
     quit()
 
 NODES = {}
@@ -11,7 +11,7 @@ try:
     with open(DATAFILE) as f:
         lines = f.readlines()
         HEIGHT = len(lines)
-        WIDTH = len(lines[0])
+        WIDTH = len(lines[0].strip())
         for row, line in enumerate(lines):
             for col, freq in enumerate(line.strip()):
                 if freq == '.':
