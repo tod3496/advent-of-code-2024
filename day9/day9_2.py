@@ -11,9 +11,9 @@ class File:
     def __lt__(self, other):
         if type(self) != type(other):
             raise Exception('Can\'t compare those')
-        if self.size == other.size:
-            return self.index < other.index
-        return self.size < other.size
+        if self.index == other.index:
+            return self.size < other.size
+        return self.index < other.index
     
     def is_free_space(self):
         return self.idn == '.'
@@ -48,7 +48,7 @@ def line_to_files_spaces(line):
 
 def first_fit(file: File, spaces: list[File]):
     '''
-    returns the index of the rightmost free space block that could fit the file
+    returns the index of the leftmost free space block that could fit the file
     '''
     for space in spaces:
         if space.size < file.size:
